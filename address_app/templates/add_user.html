@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block form %}
+<div class="row">
+	<div class="col-md-5">
+		<h2>Alta y modificación de usuarios</h2>
+	</div>
+</div>
+</br>
+<div class="row">
+	<div class="col-md-5">
+		<form action="" method="POST" id="form_address">
+			{% csrf_token %}
+			<div class="form-group">
+				<label>Nombre</label>
+				<input class="form-control" id="firstname" name="firstname" placeholder="Nombre">
+			</div>
+			<div class="form-group">
+				<label>Apellido</label>
+				<input class="form-control" id="lastname" name="lastname" placeholder="Apellidos">
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input class="form-control" id="email" name="email" placeholder="Email">
+			</div>
+			<div class="form-group">
+				<label>Tlf</label>
+				<input class="form-control" id="phone" name="phone" placeholder="Teléfono">
+			</div>
+			<div class="form-group">
+				<label>Web</label>
+				<input class="form-control" id="web" name="web" placeholder="Página web">
+			</div>
+		    <div class="form-group" id="locationField" >
+		    	<label>Dirección</label>
+		     	<input class="form-control" id="autocomplete" placeholder="Introduzca su dirección"></input>
+		    </div>
+
+			<table id="address" class="table table-bordered">
+				<tbody>
+					<tr>
+						<td class="field_table">Calle</td>
+						<td class="wideField" colspan="2">
+							<input class="field" id="route" name="route" disabled="true"></input>
+						</td>
+					</tr>
+					<tr>
+						<td class="field_table">Población</td>
+						<td class="wideField" colspan="2">
+							<input class="field" id="locality" name="locality" disabled="true"></input>
+						</td>
+					</tr>
+					<tr>
+						<td class="field_table">CP</td>
+						<td class="wideField" colspan="2">
+							<input class="field" id="postal_code" name="postal_code" disabled="true"></input>
+						</td>
+					</tr>
+					<tr>
+						<td class="field_table">País</td>
+						<td class="wideField" colspan="2">
+							<input class="field" id="country" name="country" disabled="true"></input>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</br></br>
+			{% if result == 'OK' %}
+				<div class="alert alert-success">
+				    <strong>Usuario guardado correctamente.</strong>
+				</div>
+			{% elif result == 'KO' %}
+				<div class="alert alert-danger">
+			    	<strong>Error al guardar al usuario.</strong>
+			  	</div>
+			{% endif %}
+	    	<button type="submit" class="btn btn-primary" id="submit">Guardar</button>
+		</form>
+    </div>
+    <div class="col-md-5">
+    	<a href="/home"><button class="btn btn-primary">Ir al home</button></a>
+    </div>
+</div>
+</br>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block form %}
+<div class="row">
+	<div class="col-md-5">
+		<h2>Búsqueda de usuarios</h2>
+	</div>
+</div>
+</br>
+<div class="row">
+	<div class="col-md-5">
+		<form action="" method="POST" id="search_user">
+			{% csrf_token %}
+			<div class="form-group">
+				<label>Nombre, email, código postal, población o país</label>
+				<input class="form-control" id="browser" name="browser" value="{{ busqueda }}">
+			</div>
+	    	<button type="submit" class="btn btn-primary" id="search">Buscar</button>
+		</form>
+		</br>
+	    <a href="/home"><button class="btn btn-primary">Ir al home</button></a>
+	</div>
+</div>
+</br>
+<div class="row">
+	<div class="col-md-5">
+		{% if total_users > 0 %}
+			<div class="alert alert-success">
+			    <strong>Todal de usuarios encontrados {{ total_users }}.</strong>
+			</div>
+		{% endif %}
+	</div>
+	<div class="col-md-5">
+		{% if update %}
+			<div class="alert alert-info">
+			    <strong>Usuario actualizado correctamente.</strong>
+			</div>
+		{% endif %}
+	</div>
+	<div class="col-md-5">
+		{% if total_users == 0 and not init %}
+			<div class="alert alert-danger">
+		    	<strong>No se ha encontrado ningún usuario con esas características</strong>
+		  	</div>
+		{% endif %}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10">
+		{% if total_users > 0 %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Email</th>
+						<th>CP</th>
+						<th>Población</th>
+						<th>País</th>
+						<th>Actualizar</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in users %}
+						<form action="" method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="update" value="si">
+							<input type="hidden" name="user_id" value="{{ i.id }}">
+							<input type="hidden" name="browser" value="{{ busqueda }}">
+							<tr {% if user_id == i.id and update %} style="background-color:#b0def7" {% endif %}>
+								<td>
+									<input class="form-control" name="nombre" value="{{ i.nombre }}">
+								</td>
+								<td>
+									<input class="form-control" name="apellidos" value="{{ i.apellidos }}">
+								</td>
+								<td>
+									<input class="form-control" name="email" value="{{ i.email }}">
+								</td>
+								<td>
+									<input class="form-control" name="cp" value="{{ i.direccion.CP }}">
+								</td>
+								<td>
+									<input class="form-control" name="poblacion" value="{{ i.direccion.poblacion }}">
+								</td>
+								<td>
+									<input class="form-control" name="pais" value="{{ i.direccion.pais }}">
+								</td>
+								<td>
+									<button type="submit" class="btn btn-primary">Actualizar</button>
+								</td>
+							</tr>
+						</form>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

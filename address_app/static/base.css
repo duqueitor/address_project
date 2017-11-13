@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+p{
+	color: red;
+}
+#map {
+	height: 100%;
+}
+
+
+
+#address {
+	border: 1px solid #000090;
+	background-color: #f0f0ff;
+	width: 480px;
+	padding-right: 2px;
+	}
+#address td {
+	font-size: 10pt;
+}
+.field {
+	width: 99%;
+}
+.slimField {
+	width: 80px;
+}
+.wideField {
+	width: 200px;
+}
+.field_table{
+	color: black!important;
+	text-align: left;
+	margin-left: 5px;
+
+}
+
+      
